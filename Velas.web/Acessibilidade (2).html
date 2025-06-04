@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Site Acessível Completo</title>
+  <style>
+    body {
+      font-size: 16px;
+      background-color: white;
+      color: black;
+      transition: all 0.3s;
+      font-family: Arial, sans-serif;
+      outline: none;
+    }
+    .high-contrast {
+      background-color: black !important;
+      color: yellow !important;
+    }
+    .grayscale {
+      filter: grayscale(100%) !important;
+    }
+    .daltonismo {
+      filter: hue-rotate(90deg);
+    }
+    .toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #eee;
+      padding: 10px;
+      z-index: 999;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    button {
+      margin: 5px;
+      padding: 5px 10px;
+    }
+    main {
+      margin-top: 80px;
+      padding: 20px;
+    }
+    a:focus, button:focus {
+      outline: 3px solid #00f;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button onclick="mudarTamanhoFonte(1)">A+</button>
+    <button onclick="mudarTamanhoFonte(-1)">A-</button>
+	
+	
+    <button onclick="toggleContrast()">Contraste</button>
+	
+	
+    <button onclick="lerTexto()">🔊 Ler Página</button>
+	
+	
+    <button onclick="resetAcessibilidade()">Resetar</button>
+  </div>
+
+  <main id="conteudo" tabindex="0" aria-label="Conteúdo principal da página">
+    <h1>Bem-vindo ao site acessível</h1>
+    <p>Este site possui algumas ferramentas para tornar a navegação mais inclusiva.</p>
+    <a href="#" aria-label="Ir para página de contato">Página de Contato</a>
+  </main>
+
+  <!-- Plugin VLibras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+	new window.VLibras.Widget('https://vlibras.gov.br/app');
+
+    let tamanhoFonte = 16;
+
+	function mudarTamanhoFonte(soma) {
+	  tamanhoFonte += soma;
+	  document.body.style.fontSize = tamanhoFonte + 'px';
+	}
+
+    function toggleContrast() {
+      document.body.classList.toggle('high-contrast');
+    }
+
+    function lerTexto() {
+      const text = document.querySelector('main').innerText;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'pt-BR';
+      speechSynthesis.speak(utterance);
+    }
+
+	function resetAcessibilidade() {
+	  document.body.classList.remove('high-contrast', 'grayscale', 'daltonismo');
+	  tamanhoFonte = 16;
+	  document.body.style.fontSize = tamanhoFonte + 'px';
+	  speechSynthesis.cancel();
+	}
+
+    // Atalhos de teclado
+    document.addEventListener('keydown', function(e) {
+      if (e.altKey && e.key === '1') changeFontSize(1);
+      if (e.altKey && e.key === '2') changeFontSize(-1);
+      if (e.altKey && e.key === '3') toggleContrast();
+      if (e.altKey && e.key === '4') toggleGrayscale();
+      if (e.altKey && e.key === '5') toggleDaltonismo();
+      if (e.altKey && e.key === '6') lerTexto();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Velas Artesanais</title>
+    <link rel="stylesheet" href="stilo.css"> <!-- Aqui ligamos o CSS externo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <title>Site Acessível Completo</title>
+  </header>
+  
+  <body>
+    <div class="toolbar">
+      <button onclick="mudarTamanhoFonte(1)">A+</button>
+      <button onclick="mudarTamanhoFonte(-1)">A-</button>
+      <button onclick="toggleContrast()">Contraste</button>
+      <button onclick="lerTexto()">🔊 Ler Página</button>
+      <button onclick="resetAcessibilidade()">Resetar</button>
+    </div>
+    
+
+<main>
+
+<body>
+  
+
+  <nav>
+    <a class="op" href="#">Página inicial</a>
+    <a class="op">Velas</a>
+    <img src="img/vela.logotipo.png" alt="" width="110" class="logo">
+    <a class="op">Contato</a>
+    <a class="op">Aromas</a>
+  </nav>
+
+  <!-- Banner principal -->
+  <div class="banner">
+    <img src="img/Vela.banner.png" alt="Velas decorativas" />
+  </div>
+
+  <!-- Galeria de imagens -->
+  <h2 class="titulo"> Galeria </h2>
+    <div class="galeria">
+    <img src="img/Vela.galeria.webp" alt="Velas com pétalas" />
+    <img src="img/Vela.galeria1.webp" alt="Pessoa segurando vela" />
+    <img src="img/Vela.galeria2.webp" alt="Velas aromáticas" />
+    <img src="img/Vela.galeria4.webp" alt="Velas pistashe" />
+  </div>
+
+  <!-- Redes sociais -->
+  <section class="redes-sociais">
+    <h2> Sobre velas </h2>
+    <div class="sobre">
+
+      <p>
+        Nossas velas aromáticas são criadas para transformar qualquer ambiente em um refúgio de calma e equilíbrio.
+        Feitas com óleos essenciais cuidadosamente selecionados, elas não apenas perfumam o espaço, mas também
+        oferecem benefícios como relaxamento,alívio do estresse e estímulo à concentração. Se você busca um momento
+        de tranquilidade após um dia agitado ou quer deixar sua casa mais acolhedora, nossas velas são a escolha perfeita. 
+    </div>
+        <h2>Redes sociais</h2>
+        <div class="icones">
+          <a href="#"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i>Instagram</a>
+          <a href="#"><i class="fa-brands fa-twitter" style="color: #ffffff;"></i> Twitter</a>
+          <a href="#"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i> Facebook</a>
+          <a href="#"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i> LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section class="contato">
+    <h2>Contato</h2>
+    <a href="#"><i class="fa-brands fa-whatsapp" style="color: #640559;"></i> WhatsApp</a>
+    <a href="#"><i class="fa-solid fa-envelope" style="color: #640559;"></i> E-mail</a>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <h4>Feito por Isabela Fernanda</h4> 
+    </li>
+    <cite> Todos os direitos reservados </cite>
+        <br> 
+        <progress></progress>
+        <time detetime=""></time>
+  </footer>
+</main>
+<!-- Plugin VLibras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+	new window.VLibras.Widget('https://vlibras.gov.br/app');
+
+    let tamanhoFonte = 16;
+
+	function mudarTamanhoFonte(soma) {
+	  tamanhoFonte += soma;
+	  document.body.style.fontSize = tamanhoFonte + 'px';
+	}
+
+    function toggleContrast() {
+      document.body.classList.toggle('high-contrast');
+    }
+
+  function lerTexto(){
+    const texto = document.querySelector('main').innerText;
+    const discurso = new SpeechSynthesisUtterance(texto);
+    discurso.lang = 'pt-BR';
+    SpeechSynthesis.speak(discurso);
+  }
+  	function resetAcessibilidade() {
+      location.reload();
+    }
+    
+</script>
+
+</body>
+</html>
