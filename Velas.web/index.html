@@ -1,121 +1,276 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+  <!DOCTYPE html>
+  <html lang="pt-br">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Velas Artesanais</title>
-    <link rel="stylesheet" href="stilo.css"> <!-- Aqui ligamos o CSS externo -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-   <title>Site Acessível Completo</title>
-  </header>
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modo Secreto</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(to right, #b3f0e6, #ffe6e6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .senha-container {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(8px);
+        border-radius: 20px;
+        padding: 40px 30px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        max-width: 400px;
+        width: 90%;
+      }
+
+      input[type="password"] {
+        padding: 12px;
+        font-size: 1rem;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      button {
+        margin-top: 15px;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 20px;
+        background-color: #1d6d50;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      button:hover {
+        background-color: #14905d;
+      }
+
+      #conteudoSecreto {
+        display: none;
+        width: 100%;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        padding: 50px 40px;
+        max-width: 750px;
+        text-align: center;
+        margin: 40px auto;
+        animation: fadeIn 0.7s ease-in-out;
+        position: relative;
+      }
+
+      .observacao {
+        font-size: 0.95rem;
+        color: #777;
+        margin-bottom: 20px;
+        font-style: italic;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+        margin: 0 0 25px 0;
+        font-weight: 700;
+        color: #333;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      p {
+        font-size: 1rem;
+        margin: 8px 0;
+        line-height: 1.5;
+        color: #555;
+      }
+
+      .buttons {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: relative;
+        height: 80px;
+      }
+
+      .btn-yes, .btn-no {
+        padding: 12px 22px;
+        border-radius: 30px;
+        border: none;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        max-width: 280px;
+        word-wrap: break-word;
+        position: relative;
+      }
+
+      .btn-yes {
+        font-weight: bold;
+        background: #ffffff;
+        color: #1d6d50;
+      }
+
+      .btn-yes:hover {
+        background: #dfffe9;
+        transform: scale(1.05);
+      }
+
+      .btn-no {
+        background: #ffffff;
+        color: #8a1a1a;
+      }
+
+      .btn-no:hover {
+        background-color: #ffe3e3;
+        transform: scale(1.05);
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* ===== POP-UP MENSAGEM ===== */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.4);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+      }
+
+      .popup {
+        background: #fff;
+        padding: 30px 40px;
+        border-radius: 20px;
+        text-align: center;
+        max-width: 500px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      .popup button {
+        margin-top: 20px;
+        background-color: #1d6d50;
+        color: white;
+        border-radius: 15px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      .popup button:hover {
+        background-color: #14905d;
+      }
+
+      .popup img {
+        max-width: 100%;
+        border-radius: 15px;
+      }
+
+    </style>
+  </head>
   <body>
-    <div class="toolbar">
-      <button onclick="mudarTamanhoFonte(1)">A+</button>
-      <button onclick="mudarTamanhoFonte(-1)">A-</button>
-      <button onclick="toggleContrast()">Contraste</button>
-      <button onclick="lerTexto()">🔊 Ler Página</button>
-      <button onclick="resetAcessibilidade()">Resetar</button>
+
+    <div class="senha-container" id="senhaContainer">
+      <h2>🕶️ Modo Secreto</h2>
+      <p>Para continuar digite a senha:</p>
+      <input type="password" id="senhaInput" placeholder="Digite a senha">
+      <br>
+      <button onclick="verificarSenha()">Entrar</button>
+      <p>Dica: nome da melhor aluna. Começa com I e termina com A.<br>
+          (a letra I é maiúscula e o restante é minúscula)</p>
     </div>
-    
 
-<main>
+    <div id="conteudoSecreto">
+      <div class="card">
+        <div class="observacao">Esse site contém um pouco de drama, mas isso é detalhe. Foca na resposta.</div>
+        <h1>TOP 5 MOTIVOS PARA VOLTAR A DAR AULA P/ T.I</h1>
+        <p>1. Sem uma instrutora mulher, minha representatividade caiu 50%. Agora sou minoria da minoria!</p>
+        <p>2. Vindo de humanas, estou tendo que fingir que entendo essa galera da tecnologia.</p>
+        <p>3. RH e ADM já estão se formando... já aprenderam tudo o que tinha pra aprender. Eles se viram.</p>
+        <p>4. Estou tendo que conviver com mais de 10 homens e nenhum deles é o homem que eu amo. Difícil</p>
+        <p>5. Por último e não menos importante: demorei pra desenvolver essa página (e daí que foi com o ChatGpt?)</p>
+        <p><b>Dito isso, você escolhe:</b></p>
+        <div class="buttons">
+          <button class="btn-yes" id="btnYes">Voltar a dar aula para T.I</button>
+          <button class="btn-no" id="btnNo">Continuar dando aula para os vizinhos, ignorando as observações citadas.</button>
+        </div>
+      </div>
+    </div>
 
-<body>
+    <!-- Overlay e popup -->
+    <div class="overlay" id="overlay">
+      <div class="popup">
+        <div id="popupMensagem"></div>
+        <button onclick="fecharPopup()">Desculpa</button>
+      </div>
+    </div>
+
+    <script>
+      const senhaCorreta = "Isabela";
+
+      function verificarSenha() {
+        const senha = document.getElementById("senhaInput").value;
+        if(senha === senhaCorreta) {
+          document.getElementById("senhaContainer").style.display = "none";
+          document.getElementById("conteudoSecreto").style.display = "block";
+        } else {
+          alert("Senha incorreta! 😢 Tente novamente.");
+          document.getElementById("senhaInput").value = "";
+        }
+      }
+
+      const btnNo = document.getElementById("btnNo");
+      const btnYes = document.getElementById("btnYes");
+      const overlay = document.getElementById("overlay");
+      const popupMensagem = document.getElementById("popupMensagem");
+
+      const mensagens = [
+        "Cada clique, uma lágrima!",
+        "Ok, vou tentar sobreviver sozinha na sala de TI...",
+        "Vou fingir que está tudo bem…",
+        "Isso dói mais que terminar um namoro..."
+      ];
+
+      let indiceMensagem = 0;
+
+      // Clique no botão "não"
+      btnNo.addEventListener("click", () => {
+        popupMensagem.innerText = mensagens[indiceMensagem];
+        overlay.style.display = "flex";
+        indiceMensagem = (indiceMensagem + 1) % mensagens.length;
+      });
+
+      // Clique no botão "sim" - mostra apenas o GIF
+btnYes.addEventListener("click", () => {
+  popupMensagem.innerHTML = '<img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDM4cXFmbmUzajF2dTgyaHNueG1hYzVmaHhnbHJ2dzkwdzRhcWFpMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5xtDarmwsuR9sDRObyU/giphy.gif" alt="GIF comemorativo" style="max-width:100%; border-radius:15px;">';
   
+  // Remove o botão "Desculpa" temporariamente
+  overlay.querySelector("button").style.display = "none";
+  
+  overlay.style.display = "flex";
+});
 
-  <nav>
-    <a class="op" href="#">Página inicial</a>
-    <a class="op">Velas</a>
-    <img src="img/vela.logotipo.png" alt="" width="110" class="logo">
-    <a class="op">Contato</a>
-    <a class="op">Aromas</a>
-  </nav>
-
-  <!-- Banner principal -->
-  <div class="banner">
-    <img src="img/Vela.banner.png" alt="Velas decorativas" />
-  </div>
-
-  <!-- Galeria de imagens -->
-  <h2 class="titulo"> Galeria </h2>
-    <div class="galeria">
-    <img src="img/Vela.galeria.webp" alt="Velas com pétalas" />
-    <img src="img/Vela.galeria1.webp" alt="Pessoa segurando vela" />
-    <img src="img/Vela.galeria2.webp" alt="Velas aromáticas" />
-    <img src="img/Vela.galeria4.webp" alt="Velas pistashe" />
-  </div>
-
-  <!-- Redes sociais -->
-  <section class="redes-sociais">
-    <h2> Sobre velas </h2>
-    <div class="sobre">
-
-      <p>
-        Nossas velas aromáticas são criadas para transformar qualquer ambiente em um refúgio de calma e equilíbrio.
-        Feitas com óleos essenciais cuidadosamente selecionados, elas não apenas perfumam o espaço, mas também
-        oferecem benefícios como relaxamento,alívio do estresse e estímulo à concentração. Se você busca um momento
-        de tranquilidade após um dia agitado ou quer deixar sua casa mais acolhedora, nossas velas são a escolha perfeita. 
-    </div>
-        <h2>Redes sociais</h2>
-        <div class="icones">
-          <a href="#"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i>Instagram</a>
-          <a href="#"><i class="fa-brands fa-twitter" style="color: #ffffff;"></i> Twitter</a>
-          <a href="#"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i> Facebook</a>
-          <a href="#"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i> LinkedIn</a>
-    </div>
-  </section>
-
-  <!-- Contato -->
-  <section class="contato">
-    <h2>Contato</h2>
-    <a href="#"><i class="fa-brands fa-whatsapp" style="color: #640559;"></i> WhatsApp</a>
-    <a href="#"><i class="fa-solid fa-envelope" style="color: #640559;"></i> E-mail</a>
-  </section>
-
-  <!-- Rodapé -->
-  <footer>
-    <h4>Feito por Isabela Fernanda</h4> 
-    </li>
-    <cite> Todos os direitos reservados </cite>
-        <br> 
-        <progress></progress>
-        <time detetime=""></time>
-  </footer>
-</main>
-<!-- Plugin VLibras -->
-  <div vw class="enabled">
-    <div vw-access-button class="active"></div>
-    <div vw-plugin-wrapper>
-      <div class="vw-plugin-top-wrapper"></div>
-    </div>
-  </div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>
-	new window.VLibras.Widget('https://vlibras.gov.br/app');
-
-    let tamanhoFonte = 16;
-
-	function mudarTamanhoFonte(soma) {
-	  tamanhoFonte += soma;
-	  document.body.style.fontSize = tamanhoFonte + 'px';
-	}
-
-    function toggleContrast() {
-      document.body.classList.toggle('high-contrast');
-    }
-
-  function lerTexto(){
-    const texto = document.querySelector('main').innerText;
-    const discurso = new SpeechSynthesisUtterance(texto);
-    discurso.lang = 'pt-BR';
-    SpeechSynthesis.speak(discurso);
-  }
-  	function resetAcessibilidade() {
-      location.reload();
-    }
-    
-</script>
-
-</body>
-</html>
+      function fecharPopup() {
+        overlay.style.display = "none";
+      }
+    </script>
+  </body>
+  </html>
